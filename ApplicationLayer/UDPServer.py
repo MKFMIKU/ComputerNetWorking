@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+from socket import *
+import time
+
+serverPort = 12000
+serverSocket = socket(AF_INET, SOCK_DGRAM)
+serverSocket.bind(('', serverPort))
+print("The server is ready to receive")
+while 1:
+    message, clientAddress = serverSocket.recvfrom(2048)
+    print("Receive: "+message.decode('utf-8'))
+    response = time.ctime().encode('utf-8')
+    serverSocket.sendto(response, clientAddress)
